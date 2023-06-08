@@ -65,7 +65,7 @@ class QRReader extends StatefulWidget {
 }
 
 class _QRReader extends State<QRReader> {
-  Barcode? result;
+  Barcode? bookingId;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -93,7 +93,7 @@ class _QRReader extends State<QRReader> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  if (result != null)
+                  if (bookingId != null)
                     Text('test')
                   else
                     const Text('Scan a code'),
@@ -216,12 +216,12 @@ class _QRReader extends State<QRReader> {
       if (scanData.code != null) {
         controller.pauseCamera();
         setState(() {
-          result = scanData;
+          bookingId = scanData;
         });
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Checkin2(result: result?.code ?? ''),
+            builder: (context) => Checkin2(bookingId: bookingId?.code ?? ''),
           ),
         );
       }
