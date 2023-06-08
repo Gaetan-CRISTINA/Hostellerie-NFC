@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'Views/menu.dart';
 import 'Views/login.dart';
 
 void main() => runApp(const MyApp());
@@ -33,7 +34,7 @@ class Home extends StatelessWidget {
         ),
         backgroundColor: Color(0xFFe6b34b),
       ),
-      body: const Login(),
+      body: const Menu(),
     );
   }
 }

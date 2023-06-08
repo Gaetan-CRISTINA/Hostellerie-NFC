@@ -8,7 +8,6 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController();
     return SingleChildScrollView(
       child: Container(
         color: Colors.white,
