@@ -1,4 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Views/checkin1.dart';
 import 'package:hostellerie/Views/create_key1.dart';
