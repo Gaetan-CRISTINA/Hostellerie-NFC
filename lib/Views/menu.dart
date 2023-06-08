@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hostellerie/Views/login.dart';
 import '../Components/primaryButton.dart';
 
 class Menu extends StatelessWidget {
@@ -22,7 +23,7 @@ class Menu extends StatelessWidget {
             ),
           ),
           SizedBox(height: 30,),
-          primaryButton(textButton: 'Check-In'),
+          primaryButton(textButton: 'Check-In',goToWidget: Login(),context: context),
           SizedBox(height: 30,),
           primaryButton(textButton: 'Créer clé'),
           SizedBox(height: 30,),
