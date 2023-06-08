@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'Views/menu.dart';
 import 'Views/login.dart';
+import 'package:hostellerie/Views/qr_code.dart';
+import 'Components/secondaryButton.dart';
+import 'Components/primaryButton.dart';
 
 void main() => runApp(const MyApp());
 
@@ -17,6 +20,10 @@ class MyApp extends StatelessWidget {
       home: Home(),
       debugShowCheckedModeBanner: false,
       title: _title,
+        routes: {
+        '/qr-code': (context) => const QRcodeReader(),
+      },
+      initialRoute: '/',
     );
   }
 }
@@ -38,4 +45,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
