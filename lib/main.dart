@@ -2,7 +2,8 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:hostellerie/Components/secondaryButton.dart';
+import 'package:hostellerie/Views/qr_code.dart';
+import 'Components/secondaryButton.dart';
 
 import 'Components/primaryButton.dart';
 
@@ -19,6 +20,10 @@ class MyApp extends StatelessWidget {
       home: Home(),
       debugShowCheckedModeBanner: false,
       title: _title,
+        routes: {
+        '/qr-code': (context) => const QRcodeReader(),
+      },
+      initialRoute: '/',
     );
   }
 }
@@ -108,6 +113,21 @@ class FirstPage extends StatelessWidget {
                     textButton: 'Cancel',
                   ),
                 ),
+                FilledButton.tonal(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/qr-code');
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.qr_code_scanner),
+                      SizedBox(width: 10),
+                      Text(
+                        'QR-Code Reader',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  )),
               ],
             )
           ],
