@@ -8,6 +8,7 @@ Future<Booking> fetchBookingById(String bookingId) async {
       'https://hostellerie-asteracee.online/api/bookings/$bookingId'));
 
   if (response.statusCode == 200) {
+
     return Booking.fromJson(jsonDecode(response.body));
   } else {
     throw Exception('Failed to load booking');
@@ -27,3 +28,17 @@ updateBooking(String bookingId) async {
     throw Exception('Failed to confirm booking');
   }
 }
+
+Future<List<Booking>> fetchAllBookings( ) async {
+  final response = await http.get(Uri.parse(
+      'https://hostellerie-asteracee.online/api/bookings'));
+
+  if (response.statusCode == 200) {
+    return bookingListFromJson(response.body);
+  } else {
+    throw Exception('Failed to load booking');
+  }
+}
+List<Booking> bookingListFromJson(String str) => List<Booking>.from(json.decode(str).map((x) => Booking.fromJson(x)));
+
+String bookingListToJson(List<Booking> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
