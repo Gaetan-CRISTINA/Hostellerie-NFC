@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,11 +20,10 @@ class NFCWrapperView extends StatelessWidget {
           color: _isScanning ? Colors.green[100] : Colors.amber[100],
           shape: BoxShape.circle,
         ),
-        child: Center(
-            child: Icon(
-          CupertinoIcons.radiowaves_right,
-          size: 100,
-          color: _isScanning ? Colors.green[400] : Colors.amber[400],
-        )));
+        child: Container(
+            width: 100,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [Image.asset("images/nfc.png")])));
   }
 }

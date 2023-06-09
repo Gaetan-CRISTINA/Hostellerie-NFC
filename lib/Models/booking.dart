@@ -12,18 +12,19 @@ class Booking {
   int bookingId;
   int totalPrice;
   int occupants;
+  int nfcCount;
 
-  Booking({
-    required this.room,
-    required this.user,
-    required this.options,
-    required this.startingDate,
-    required this.endingDate,
-    required this.status,
-    required this.bookingId,
-    required this.totalPrice,
-    required this.occupants,
-  });
+  Booking(
+      {required this.room,
+      required this.user,
+      required this.options,
+      required this.startingDate,
+      required this.endingDate,
+      required this.status,
+      required this.bookingId,
+      required this.totalPrice,
+      required this.occupants,
+      required this.nfcCount});
 
   factory Booking.fromJson(Map<String, dynamic> json) => Booking(
         room: Room.fromJson(json["room"]),
@@ -36,6 +37,7 @@ class Booking {
         bookingId: json["booking_id"],
         totalPrice: json["total_price"],
         occupants: json["occupants"],
+        nfcCount: json["nfc_count"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,11 +52,6 @@ class Booking {
         "booking_id": bookingId,
         "total_price": totalPrice,
         "occupants": occupants,
+        "nfc_count": nfcCount,
       };
 }
-
-
-
-
-
-

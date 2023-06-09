@@ -94,7 +94,7 @@ class _QRReader extends State<QRReader> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   if (bookingId != null)
-                    Text('test')
+                    Text('')
                   else
                     const Text('Scan a code'),
                   Row(
