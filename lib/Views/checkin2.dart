@@ -51,6 +51,7 @@ class _Checkin2 extends State<Checkin2> {
             ),
             MaterialButton(
               onPressed: () => {
+                updateBooking(dataToWrite!),
                 if(dataToWrite != null)
                 Navigator.push(
                   context,

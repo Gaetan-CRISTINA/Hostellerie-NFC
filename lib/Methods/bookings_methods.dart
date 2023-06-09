@@ -4,8 +4,8 @@ import '../Models/booking.dart';
 import 'dart:convert';
 
 Future<Booking> fetchBookingById(String bookingId) async {
-    final response =
-      await http.get(Uri.parse('https://hostellerie-asteracee.online/api/bookings/$bookingId'));
+  final response = await http.get(Uri.parse(
+      'https://hostellerie-asteracee.online/api/bookings/$bookingId'));
 
   if (response.statusCode == 200) {
     return Booking.fromJson(jsonDecode(response.body));
@@ -17,3 +17,13 @@ Future<Booking> fetchBookingById(String bookingId) async {
 Booking bookingFromJson(String str) => Booking.fromJson(json.decode(str));
 
 String bookingToJson(Booking data) => json.encode(data.toJson());
+
+updateBooking(String bookingId) async {
+  final response = await http.get(Uri.parse(
+      'https://hostellerie-asteracee.online/api/bookings/confirm/$bookingId'));
+  if (response.statusCode == 200) {
+    return true;
+  } else {
+    throw Exception('Failed to confirm booking');
+  }
+}
