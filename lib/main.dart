@@ -17,10 +17,6 @@ class MyApp extends StatelessWidget {
       home: Home(),
       debugShowCheckedModeBanner: false,
       title: _title,
-        routes: {
-        '/qr-code': (context) => const QRcodeReader(),
-      },
-      initialRoute: '/',
     );
   }
 }
