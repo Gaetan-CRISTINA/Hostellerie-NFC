@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, implementation_imports, avoid_unnecessary_containers, unnecessary_brace_in_string_interps, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:hostellerie/Components/bookingCard.dart';
+import 'package:hostellerie/Components/customerCard.dart';
 
 import '../Methods/bookings_methods.dart';
 import '../Models/booking.dart';
@@ -17,6 +19,7 @@ class Checkin2 extends StatefulWidget {
 class _Checkin2 extends State<Checkin2> {
   late Future<Booking> futurBooking;
   String? dataToWrite;
+  Booking? booking;
 
   @override
   void initState() {
@@ -42,7 +45,9 @@ class _Checkin2 extends State<Checkin2> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   dataToWrite = snapshot.data!.bookingId.toString();
-                  return Text(snapshot.data!.bookingId.toString());
+                  booking = snapshot.data;
+                  // return Text(snapshot.data!.bookingId.toString());
+                  return BookingCard(booking: booking!);
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
                 }
@@ -52,13 +57,14 @@ class _Checkin2 extends State<Checkin2> {
             MaterialButton(
               onPressed: () => {
                 updateBooking(dataToWrite!),
-                if(dataToWrite != null)
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NfcWriteData(dataToWrite: dataToWrite ?? ''),
+                if (dataToWrite != null)
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          NfcWriteData(dataToWrite: dataToWrite ?? ''),
+                    ),
                   ),
-                ),
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(35))),

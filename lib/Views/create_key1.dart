@@ -33,7 +33,7 @@ class CreateFirstPart extends StatelessWidget {
             children: <Widget>[
               Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: customerCard(),
+              // child: customerCard(booking: booking),
               ),
             ],
           ),
