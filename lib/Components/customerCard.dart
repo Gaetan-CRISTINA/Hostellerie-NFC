@@ -1,10 +1,12 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
+import '../Models/booking.dart';
 import '../Views/create_key2.dart';
 
 class customerCard extends StatelessWidget {
-  const customerCard({super.key});
+  final Booking booking;
+  const customerCard({super.key, required this.booking});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class customerCard extends StatelessWidget {
                       SizedBox(
                         height: 5,
                       ),
-                      Text('Premium room',
+                      Text(booking.room.roomType.name,
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
@@ -37,7 +39,7 @@ class customerCard extends StatelessWidget {
                       SizedBox(
                         height: 15,
                       ),
-                      Text('n° 564654695',
+                      Text('n° ${booking.bookingId}',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 15,
@@ -74,7 +76,7 @@ class customerCard extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: const [
+                  children: [
                     Text('0 Key',
                         textAlign: TextAlign.right,
                         style: TextStyle(
@@ -84,7 +86,7 @@ class customerCard extends StatelessWidget {
                     SizedBox(
                       height: 50,
                     ),
-                    Text('Room 202',
+                    Text('Room ${booking.room.number.toString()}',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
