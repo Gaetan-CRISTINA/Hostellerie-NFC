@@ -1,8 +1,11 @@
-import 'package:flutter/cupertino.dart';
+
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Views/checkin1.dart';
 import 'package:hostellerie/Views/create_key1.dart';
 import 'package:hostellerie/Views/login.dart';
+import 'package:hostellerie/Views/nfc_write.dart';
 import 'package:hostellerie/Views/read_key1.dart';
 import '../Components/primaryButton.dart';
 
@@ -92,7 +95,7 @@ class Menu extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
               child: Text("ReadKey1TEST"),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, deprecated_member_use
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hostellerie/Views/checkin2.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRcodeReader extends StatelessWidget {
@@ -12,30 +13,51 @@ class QRcodeReader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Row(
-        children: const [
-          Icon(Icons.document_scanner_rounded),
-          SizedBox(width: 10),
-          Text('QR-Code Reader'),
-        ],
-      )),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const QRReader(),
-            ));
-          },
-          child: const Text('Launch Reader'),
+        body: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 18.0, left: 0),
+          child: Text(
+            'Scan your QR Code',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+          ),
         ),
-      ),
-    );
+        Padding(
+          padding: const EdgeInsets.only(top: 50.0, bottom: 40),
+          child: Container(
+            width: 600,
+            height: 400,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/qrDemo.png"),
+              ),
+            ),
+          ),
+        ),
+        MaterialButton(
+          onPressed: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => QRReader(),
+              ),
+            )
+          },
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(35))),
+          textColor: Colors.white,
+          color: Color(0xFFe6b34b),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+            child: Text('Launch QR Code Reader'),
+          ),
+        ),
+      ],
+    ));
   }
 }
 
 class QRReader extends StatefulWidget {
-
   const QRReader({Key? key}) : super(key: key);
 
   @override
@@ -43,7 +65,7 @@ class QRReader extends StatefulWidget {
 }
 
 class _QRReader extends State<QRReader> {
-  Barcode? result;
+  Barcode? bookingId;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -71,8 +93,8 @@ class _QRReader extends State<QRReader> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  if (result != null)
-                    Text('Data: ${result!.code}')
+                  if (bookingId != null)
+                    Text('test')
                   else
                     const Text('Scan a code'),
                   Row(
@@ -82,6 +104,10 @@ class _QRReader extends State<QRReader> {
                       Container(
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xFFe6b34b),
+                                shape: StadiumBorder() // Background color
+                                ),
                             onPressed: () async {
                               await controller?.toggleFlash();
                               setState(() {});
@@ -96,6 +122,10 @@ class _QRReader extends State<QRReader> {
                       Container(
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xFFe6b34b),
+                                shape: StadiumBorder() // Background color
+                                ),
                             onPressed: () async {
                               await controller?.flipCamera();
                               setState(() {});
@@ -121,6 +151,10 @@ class _QRReader extends State<QRReader> {
                       Container(
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFe6b34b),
+                              shape: StadiumBorder() // Background color
+                              ),
                           onPressed: () async {
                             await controller?.pauseCamera();
                           },
@@ -131,6 +165,10 @@ class _QRReader extends State<QRReader> {
                       Container(
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFe6b34b),
+                              shape: StadiumBorder() // Background color
+                              ),
                           onPressed: () async {
                             await controller?.resumeCamera();
                           },
@@ -161,7 +199,7 @@ class _QRReader extends State<QRReader> {
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
-          borderColor: Colors.red,
+          borderColor: Color(0xFFe6b34b),
           borderRadius: 10,
           borderLength: 30,
           borderWidth: 10,
@@ -175,9 +213,18 @@ class _QRReader extends State<QRReader> {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
+      if (scanData.code != null) {
+        controller.pauseCamera();
+        setState(() {
+          bookingId = scanData;
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Checkin2(bookingId: bookingId?.code ?? ''),
+          ),
+        );
+      }
     });
   }
 
