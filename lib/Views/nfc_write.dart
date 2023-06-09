@@ -1,9 +1,12 @@
 //Author : Anthony Da Cruz - 2023
-// ignore_for_file: prefer_const_constructors_in_immutables, unused_field, prefer_final_fields, avoid_print, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, unused_field, prefer_final_fields, avoid_print, prefer_const_constructors, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:hostellerie/Views/confirm_created_card.dart';
+import 'package:hostellerie/Views/fail_created_card.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
+import '../Methods/bookings_methods.dart';
 import '../nfc_helpers/nfc_wrapper_view.dart';
 
 class NfcWriteData extends StatefulWidget {
@@ -15,8 +18,7 @@ class NfcWriteData extends StatefulWidget {
 }
 
 class _KeycardCreateNfcState extends State<NfcWriteData> {
-  getDataCallback(String data) {
-  }
+  getDataCallback(String data) {}
 
   bool _isScanning = false;
   bool? _writeSuccess;
@@ -46,11 +48,22 @@ class _KeycardCreateNfcState extends State<NfcWriteData> {
           children: [
             const SizedBox(height: 40),
             GestureDetector(
-              onTap: () => {
-                setState(() {
-                  _isScanning = true;
-                  writeData(widget.dataToWrite);
-                })
+              onTap: () async {
+                try {
+                  writeData(await getHash(widget.dataToWrite));
+                  setState(() {
+                    _isScanning = true;
+                  });
+                } catch (e) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FailCreatedCard(),
+                      ));
+                  setState(() {
+                    _isScanning = false;
+                  });
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -109,6 +122,20 @@ class _KeycardCreateNfcState extends State<NfcWriteData> {
           _writeSuccess = true;
           _isScanning = false;
         });
+        if (_writeSuccess == true)
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ConfirmCreatedCard(),
+            ),
+          );
+        else
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FailCreatedCard(),
+            ),
+          );
       } catch (e) {
         NfcManager.instance.stopSession(errorMessage: e.toString());
         setState(() {

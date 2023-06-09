@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Models/booking.dart';
-import '../Views/create_key2.dart';
 
 class BookingCard extends StatelessWidget {
   final Booking booking;
@@ -47,26 +46,26 @@ class BookingCard extends StatelessWidget {
                       SizedBox(
                         height: 25,
                       ),
-                      MaterialButton(
-                        onPressed: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreateKey2(),
-                            ),
-                          )
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(35))),
-                        textColor: Colors.white,
-                        color: Color(0xFFe6b34b),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 15),
-                          child: Text('Create key'),
-                        ),
-                      )
+                      // MaterialButton(
+                      //   onPressed: () => {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => CreateKey2(),
+                      //       ),
+                      //     )
+                      //   },
+                      //   shape: RoundedRectangleBorder(
+                      //       borderRadius:
+                      //           BorderRadius.all(Radius.circular(35))),
+                      //   textColor: Colors.white,
+                      //   color: Color(0xFFe6b34b),
+                      //   child: Padding(
+                      //     padding: EdgeInsets.symmetric(
+                      //         horizontal: 10, vertical: 15),
+                      //     child: Text('Create key'),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),

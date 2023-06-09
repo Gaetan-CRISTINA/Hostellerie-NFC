@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import '../Components/customerCard.dart';
 
 class CreateKey1 extends StatelessWidget {
   const CreateKey1({super.key});

@@ -2,12 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/bookingCard.dart';
-import 'package:hostellerie/Components/customerCard.dart';
+import 'package:hostellerie/Views/confirm_checking.dart';
 
 import '../Methods/bookings_methods.dart';
 import '../Models/booking.dart';
-import 'nfc_write.dart';
-
 class Checkin2 extends StatefulWidget {
   final String bookingId;
   const Checkin2({super.key, required this.bookingId});
@@ -62,7 +60,7 @@ class _Checkin2 extends State<Checkin2> {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          NfcWriteData(dataToWrite: dataToWrite ?? ''),
+                          ConfirmCheckin(dataToWrite: dataToWrite ?? ''),
                     ),
                   ),
               },
