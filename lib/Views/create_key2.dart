@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../Components/customerCard.dart';
 
 class CreateKey2 extends StatelessWidget {
   const CreateKey2({super.key});
