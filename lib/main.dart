@@ -1,11 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types
-import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'Views/menu.dart';
-import 'Views/login.dart';
 import 'package:hostellerie/Views/qr_code.dart';
-import 'Components/secondaryButton.dart';
-import 'Components/primaryButton.dart';
 
 void main() => runApp(const MyApp());
 
