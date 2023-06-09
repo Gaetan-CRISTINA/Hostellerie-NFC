@@ -34,7 +34,7 @@ updateBooking(String bookingId) async {
 
 Future<List<Booking>> fetchAllBookings( ) async {
   final response = await http.get(Uri.parse(
-      'https://hostellerie-asteracee.online/api/bookings'));
+      'https://hostellerie-asteracee.online/api/bookings/confirmedOngoingBooking'));
 
   if (response.statusCode == 200) {
     return bookingListFromJson(response.body);

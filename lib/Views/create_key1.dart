@@ -32,29 +32,27 @@ class _Booking extends State<CreateKey1> {
         ),
         backgroundColor: Color(0xFFe6b34b),
       ),
+
       body: FutureBuilder(
         future: futureResult,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (
-                context, index) {
-                  return Center(
-                    child: Container(
-                      color: Colors.white,
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16.0),
-                            child: customerCard(booking: snapshot.data![index]),
-                          ),
-                        ],
+            return ListView(
+                scrollDirection: Axis.vertical,children: [
+                  Text("Selection de la chambre"),
+                  ...snapshot.data!.map((e) {
+                    return Center(
+                      child: Container(
+                        color: Colors.white,
+                        child: Column(
+                          children: <Widget>[
+                            customerCard(booking: e),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                });
+                    );
+                  }).toList()
+            ],);
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }
