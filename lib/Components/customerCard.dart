@@ -12,7 +12,10 @@ class customerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(
+            bottom: 5,
+            left: 7,
+            right: 7),
         child: Card(
           elevation: 0,
           color: booking.nfcCount > 0? Color(0xFF96E29E) : Color(0xFFE9E9E9),
@@ -64,7 +67,7 @@ class customerCard extends StatelessWidget {
                           color: Color(0xFFe6b34b),
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                            child: Text('Create key'),
+                            child: Text('Create key', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                           ),
                         )
                       ],
