@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
@@ -32,70 +31,42 @@ class Menu extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          primaryButton(
-              textButton: 'Check-In', goToWidget: Login(), context: context),
+          PrimaryButton(
+              textButton: 'Check-In',
+              action: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Checkin1(),
+                  ),
+                );
+              }, size: 1,),
           SizedBox(
             height: 30,
           ),
-          primaryButton(textButton: 'Créer clé'),
+          PrimaryButton(
+              textButton: 'Créer clé',
+              action: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CreateKey1(),
+                  ),
+                );
+              }, size: 1,),
           SizedBox(
             height: 30,
           ),
-          primaryButton(textButton: 'Lire clé'),
-          MaterialButton(
-            onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Checkin1(),
-                ),
-              )
-            },
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(35))),
-            textColor: Colors.white,
-            color: Color(0xFF4B9BE6),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              child: Text("Checkin1TEST"),
-            ),
-          ),
-          MaterialButton(
-            onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CreateKey1(),
-                ),
-              )
-            },
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(35))),
-            textColor: Colors.white,
-            color: Color(0xFF4B9BE6),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              child: Text("CreateKey1TEST"),
-            ),
-          ),
-          MaterialButton(
-            onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ReadKey1(),
-                ),
-              )
-            },
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(35))),
-            textColor: Colors.white,
-            color: Color(0xFF4B9BE6),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              child: Text("ReadKey1TEST"),
-            ),
-          ),
+          PrimaryButton(
+              textButton: 'Lire clé',
+              action: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ReadKey1(),
+                  ),
+                );
+              }, size: 1,),
           MaterialButton(
             onPressed: () => {
               Navigator.push(
