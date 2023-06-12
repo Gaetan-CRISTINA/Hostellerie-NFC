@@ -39,7 +39,15 @@ class _Booking extends State<CreateKey1> {
           if (snapshot.hasData) {
             return ListView(
                 scrollDirection: Axis.vertical,children: [
-                  Text("Selection de la chambre"),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 30,
+                        bottom: 15,
+                        left: 25
+                    ),
+                    child: Text("Choose a booking",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                  ),
                   ...snapshot.data!.map((e) {
                     return Center(
                       child: Container(

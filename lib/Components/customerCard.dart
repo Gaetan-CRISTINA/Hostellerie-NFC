@@ -14,7 +14,10 @@ class CustomerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(
+            bottom: 5,
+            left: 7,
+            right: 7),
         child: Card(
           elevation: 0,
           color: booking.nfcCount > 0 ? Color(0xFF96E29E) : Color(0xFFE9E9E9),
