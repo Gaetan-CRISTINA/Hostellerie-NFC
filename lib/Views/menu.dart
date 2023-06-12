@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hostellerie/Views/checkin1.dart';
 import 'package:hostellerie/Views/confirm_created_card.dart';
 import 'package:hostellerie/Views/create_key1.dart';
+import 'package:hostellerie/Views/nfc_write.dart';
 import 'package:hostellerie/Views/read_key1.dart';
 import '../Components/primaryButton.dart';
 
@@ -71,7 +72,7 @@ class Menu extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ConfirmCreatedCard(),
+                  builder: (context) => NfcWriteData(dataToWrite: '3'),
                 ),
               )
             },

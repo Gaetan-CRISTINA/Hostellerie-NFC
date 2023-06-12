@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/secondaryButton.dart';
 
 class ConfirmCreatedCard extends StatelessWidget {
-  const ConfirmCreatedCard({super.key});
+  final String dataToWrite;
+  const ConfirmCreatedCard({super.key, required this.dataToWrite});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class ConfirmCreatedCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ConfirmCreatedCard(),
+                        builder: (context) => ConfirmCreatedCard(dataToWrite: dataToWrite),
                       ),
                     );
                   },
