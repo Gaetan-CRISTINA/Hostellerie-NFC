@@ -30,12 +30,12 @@ class NdefRecordInfo {
       return NdefRecordInfo(
         record: _record,
         title: 'Wellknown Text',
-        subtitle: '(${_record.languageCode}) ${_record.text}',
+        subtitle: '${_record.text}',
       );
     if (_record is WellknownUriRecord)
       return NdefRecordInfo(
         record: _record,
-        title: 'Wellknown Uri',
+        title: 'hash',
         subtitle: '${_record.uri}',
       );
     if (_record is MimeRecord)

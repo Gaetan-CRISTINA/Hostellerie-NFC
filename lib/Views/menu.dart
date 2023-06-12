@@ -63,7 +63,7 @@ class Menu extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ReadKey1(),
+                    builder: (context) => ReadKey1(),
                   ),
                 );
               }, size: 1,),

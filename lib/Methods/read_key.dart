@@ -1,0 +1,36 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:hostellerie/Models/door_response.dart';
+import 'package:http/http.dart' as http;
+
+import '../Models/room_identity.dart';
+
+Future openDoor(int roomId, String hash) async {
+  final body = {'room_id': roomId, 'hash': hash};
+  final jsonString = json.encode(body);
+  final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+  final response = await
+  http.post(Uri.parse('https://hostellerie-asteracee.online/api/openDoor'),
+      headers: headers,
+      body: jsonString);
+  if (response.statusCode == 200) {
+    return doorResponseFromJson(response.body);
+  } else {
+    throw Exception('too many key created');
+  }
+}
+
+Future<List<RoomIdentity>> getAllRooms() async{
+  var response = await http
+      .get(Uri.parse('https://hostellerie-asteracee.online/api/getAllRooms'),
+  );
+  if (response.statusCode == 200) {
+    return roomIdentityFromJson(response.body);
+  } else {
+    throw Exception('Failed to load rooms');
+  }
+}
+
+List<RoomIdentity> roomIdentityFromJson(String str) => List<RoomIdentity>.from(json.decode(str).map((x) => RoomIdentity.fromJson(x)));
+
+String roomIdentityToJson(List<RoomIdentity> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

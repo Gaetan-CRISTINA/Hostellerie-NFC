@@ -42,8 +42,8 @@ class _Booking extends State<CreateKey1> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 30,
-                        bottom: 15,
-                        left: 25
+                        bottom: 25,
+                        left: 10
                     ),
                     child: Text("Choose a booking",
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
