@@ -6,6 +6,7 @@ import 'package:hostellerie/Views/confirm_checking.dart';
 
 import '../Methods/bookings_methods.dart';
 import '../Models/booking.dart';
+
 class Checkin2 extends StatefulWidget {
   final String bookingId;
   const Checkin2({super.key, required this.bookingId});
@@ -35,45 +36,59 @@ class _Checkin2 extends State<Checkin2> {
         ),
         backgroundColor: Color(0xFFe6b34b),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            FutureBuilder<Booking>(
-              future: futurBooking,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  dataToWrite = snapshot.data!.bookingId.toString();
-                  booking = snapshot.data;
-                  // return Text(snapshot.data!.bookingId.toString());
-                  return BookingCard(booking: booking!);
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-                return const CircularProgressIndicator();
-              },
-            ),
-            MaterialButton(
-              onPressed: () => {
-                updateBooking(dataToWrite!),
-                if (dataToWrite != null)
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ConfirmCheckin(dataToWrite: dataToWrite ?? ''),
-                    ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 30.0),
+        child: Center(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10, bottom: 25),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Informations de la réservation',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(35))),
-              textColor: Colors.white,
-              color: Color(0xFFe6b34b),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                child: Text("Confirmed check-in"),
+                ),
               ),
-            ),
-          ],
+              FutureBuilder<Booking>(
+                future: futurBooking,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    dataToWrite = snapshot.data!.bookingId.toString();
+                    booking = snapshot.data;
+                    // return Text(snapshot.data!.bookingId.toString());
+                    return BookingCard(booking: booking!);
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  return const CircularProgressIndicator();
+                },
+              ),
+              SizedBox(height: 30),
+              MaterialButton(
+                onPressed: () => {
+                  updateBooking(dataToWrite!),
+                  if (dataToWrite != null)
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ConfirmCheckin(dataToWrite: dataToWrite ?? ''),
+                      ),
+                    ),
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(35))),
+                textColor: Colors.white,
+                color: Color(0xFFe6b34b),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  child: Text("Confirmed check-in"),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
