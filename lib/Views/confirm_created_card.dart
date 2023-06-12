@@ -66,18 +66,33 @@ class _ConfirmCreatedCard extends State<ConfirmCreatedCard> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       if (snapshot.data!.nfcCount < 2)
-                        return SecondaryButton(
-                            textButton: 'Create another key',
-                            action: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => NfcWriteData(
-                                      dataToWrite: widget.dataToWrite),
-                                ),
-                              );
-                            },
-                            size: 1);
+                        return Column(
+                          children: [
+                            SecondaryButton(
+                                textButton: 'Create another key',
+                                action: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => NfcWriteData(
+                                          dataToWrite: widget.dataToWrite),
+                                    ),
+                                  );
+                                },
+                                size: 1),
+                            SecondaryButton(
+                                textButton: 'Return Home',
+                                action: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Menu(),
+                                    ),
+                                  );
+                                },
+                                size: 2),
+                          ],
+                        );
                     }
                     return Column(
                       children: [

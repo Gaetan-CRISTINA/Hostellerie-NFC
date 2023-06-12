@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/primaryButton.dart';
+import 'package:hostellerie/Views/nfc_write.dart';
 import '../Models/booking.dart';
-import '../Views/create_key2.dart';
 
 class CustomerCard extends StatelessWidget {
   final Booking booking;
@@ -63,7 +63,7 @@ class CustomerCard extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const CreateKey2(),
+                                builder: (context) => NfcWriteData(dataToWrite: booking.bookingId.toString()),
                               ),
                             );
                           },
