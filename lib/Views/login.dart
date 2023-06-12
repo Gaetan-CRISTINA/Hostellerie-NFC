@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/secondaryButton.dart';
+import 'package:hostellerie/Views/menu.dart';
 import '../Components/primaryButton.dart';
 
 class Login extends StatelessWidget {
@@ -26,8 +26,7 @@ class Login extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding:
-              EdgeInsets.only(top: 20, left: 50.0, right: 50.0),
+              padding: EdgeInsets.only(top: 20, left: 50.0, right: 50.0),
               child: Divider(
                 color: Color(0xFFe6b34b),
                 height: 8,
@@ -39,10 +38,19 @@ class Login extends StatelessWidget {
                   labelText: 'Enter Name',
                   hintText: 'Enter Your Name'),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: primaryButton(
+              child: PrimaryButton(
                 textButton: 'Login',
+                action: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Menu(),
+                    ),
+                  );
+                },
+                size: 1,
               ),
             ),
             const Padding(
@@ -56,7 +64,7 @@ class Login extends StatelessWidget {
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: secondaryButton(
+              child: SecondaryButton(
                 textButton: 'Cancel',
               ),
             ),

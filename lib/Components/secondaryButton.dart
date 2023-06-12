@@ -1,10 +1,8 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_print
-
 import 'package:flutter/material.dart';
 
-class secondaryButton extends StatelessWidget {
+class SecondaryButton extends StatelessWidget {
   final String textButton;
-  const secondaryButton({super.key, required this.textButton});
+  const SecondaryButton({super.key, required this.textButton});
 
   @override
   Widget build(BuildContext context) {
