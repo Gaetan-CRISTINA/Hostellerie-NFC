@@ -54,7 +54,7 @@ class _Booking extends State<CreateKey1> {
                         color: Colors.white,
                         child: Column(
                           children: <Widget>[
-                            customerCard(booking: e),
+                            CustomerCard(booking: e),
                           ],
                         ),
                       ),

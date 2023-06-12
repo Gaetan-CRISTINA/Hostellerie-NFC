@@ -1,31 +1,21 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_print
-
 import 'package:flutter/material.dart';
 
-class primaryButton extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final String textButton;
-  final Widget? goToWidget;
-  final BuildContext? context;
-
-  const primaryButton({super.key, required this.textButton, this.goToWidget,this.context});
+  final VoidCallback action;
+  final int size;
+  const PrimaryButton({super.key, required this.textButton, required this.action, required this.size});
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: () => {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => goToWidget!,
-          ),
-        )
-      },
-      shape: RoundedRectangleBorder(
+      onPressed: action,
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(35))),
       textColor: Colors.white,
       color: Color(0xFFe6b34b),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+        padding: size == 1 ? const EdgeInsets.symmetric(horizontal: 50, vertical: 20) : const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Text(textButton),
       ),
     );

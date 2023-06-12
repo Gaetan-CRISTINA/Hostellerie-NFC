@@ -43,7 +43,7 @@ class ConfirmCreatedCard extends StatelessWidget {
                 SizedBox(height: 50),
                 Text('Key created'),
                 SizedBox(height: 50),
-                secondaryButton(textButton: 'Create another key')
+                SecondaryButton(textButton: 'Create another key')
               ],
             ),
           ),
