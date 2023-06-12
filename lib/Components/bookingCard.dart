@@ -1,10 +1,12 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_print
+// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_print, prefer_interpolation_to_compose_strings, must_be_immutable, unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Models/booking.dart';
+import 'package:intl/intl.dart';
 
 class BookingCard extends StatelessWidget {
   final Booking booking;
+  // final String gender;
   const BookingCard({super.key, required this.booking});
 
   @override
@@ -17,80 +19,104 @@ class BookingCard extends StatelessWidget {
             side: BorderSide(color: Color(0xFFC7C7C7)),
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: SizedBox(
-          height: 170,
+          height: 340,
           child: Row(
             children: [
               Padding(
                 padding: EdgeInsets.only(left: 20, top: 10),
                 child: SizedBox(
-                  width: 250,
+                  width: 350,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
                         height: 5,
                       ),
-                      Text(booking.room.roomType.name,
+                      Text('Réservation n°  ${booking.bookingId}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                              color: Colors.black)),
+                      Text('Chambre : ${booking.room.roomType.name}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                              color: Colors.black)),
+                      Text(' n° :${booking.room.number.toString()}',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
                               color: Colors.black)),
                       SizedBox(
-                        height: 15,
+                        height: 30,
                       ),
-                      Text('n°  ${booking.bookingId}',
+                      Row(
+                        children: [
+                          Text(
+                              ' ${booking.user.gender == 'female' ? 'Madame ' : 'Monsieur '}',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  color: Colors.black)),
+                          Text(
+                              '${booking.user.lastname.toUpperCase()} ${booking.user.firstname}',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  color: Colors.black)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          Text('Nombre de clients : ${booking.occupants}',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  color: Colors.black)),
+                          SizedBox(
+                            height: 40,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                              'Du ${DateFormat('dd/MM/yyyy').format(booking.startingDate)} Au ${DateFormat('dd/MM/yyyy').format(booking.endingDate)}',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  color: Colors.black)),
+                          Text(
+                              ' soit ${booking.endingDate.difference(booking.startingDate).inDays} nuits',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  color: Colors.black)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text('Options :',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 15,
                               color: Colors.black)),
+                      for (var option in booking.options)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(option.name.fr),
+                          ],
+                        ),
                       SizedBox(
-                        height: 25,
+                        height: 15,
                       ),
-                      // MaterialButton(
-                      //   onPressed: () => {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //         builder: (context) => CreateKey2(),
-                      //       ),
-                      //     )
-                      //   },
-                      //   shape: RoundedRectangleBorder(
-                      //       borderRadius:
-                      //           BorderRadius.all(Radius.circular(35))),
-                      //   textColor: Colors.white,
-                      //   color: Color(0xFFe6b34b),
-                      //   child: Padding(
-                      //     padding: EdgeInsets.symmetric(
-                      //         horizontal: 10, vertical: 15),
-                      //     child: Text('Create key'),
-                      //   ),
-                      // )
                     ],
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 30, right: 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text('0 Key',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                            color: Colors.black)),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Text('n° ${booking.room.number.toString()}',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                            color: Colors.black)),
-                  ],
                 ),
               ),
             ],
