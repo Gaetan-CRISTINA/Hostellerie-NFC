@@ -43,7 +43,18 @@ class ConfirmCreatedCard extends StatelessWidget {
                 SizedBox(height: 50),
                 Text('Key created'),
                 SizedBox(height: 50),
-                SecondaryButton(textButton: 'Create another key')
+                SecondaryButton(
+                  textButton: 'Create another key',
+                  action: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ConfirmCreatedCard(),
+                      ),
+                    );
+                  },
+                  size: 1,
+                ),
               ],
             ),
           ),
