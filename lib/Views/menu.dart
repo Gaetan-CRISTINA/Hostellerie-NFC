@@ -12,13 +12,6 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Check-in Customer',
-        ),
-        backgroundColor: Color(0xFFe6b34b),
-      ),
       body: Center(
         child: Column(
           children: [
