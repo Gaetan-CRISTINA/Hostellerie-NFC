@@ -1,5 +1,5 @@
 name: hostellerie
-description: A new Flutter project.
+description: User Agent App.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -40,6 +40,7 @@ dependencies:
   qr_code_scanner: ^1.0.1
   nfc_manager: ^3.2.0
   intl: ^0.18.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -91,3 +92,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  image_path: "images/logoApp.png" 
+  android: true
+  ios: true
+  # optionally, as transparency is not allowed on app store
+  # remove_alpha_ios: true
