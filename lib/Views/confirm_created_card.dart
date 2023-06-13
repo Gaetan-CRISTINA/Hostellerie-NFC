@@ -1,10 +1,28 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/secondaryButton.dart';
+import 'package:hostellerie/Methods/bookings_methods.dart';
+import 'package:hostellerie/Models/booking.dart';
+import 'package:hostellerie/Views/nfc_write.dart';
+import 'package:hostellerie/main.dart';
 
-class ConfirmCreatedCard extends StatelessWidget {
-  const ConfirmCreatedCard({super.key});
+class ConfirmCreatedCard extends StatefulWidget {
+  final String dataToWrite;
+  const ConfirmCreatedCard({super.key, required this.dataToWrite});
+
+  @override
+  State<ConfirmCreatedCard> createState() => _ConfirmCreatedCard();
+}
+
+class _ConfirmCreatedCard extends State<ConfirmCreatedCard> {
+  late Future<Booking> futureResult;
+
+  @override
+  void initState() {
+    super.initState();
+    futureResult = fetchBookingById(widget.dataToWrite);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +30,7 @@ class ConfirmCreatedCard extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: const Text(
-            'Check-in Customer',
+            'Check-in Customer key creator',
           ),
           backgroundColor: Color(0xFFe6b34b),
         ),
@@ -43,7 +61,58 @@ class ConfirmCreatedCard extends StatelessWidget {
                 SizedBox(height: 50),
                 Text('Key created'),
                 SizedBox(height: 50),
-                SecondaryButton(textButton: 'Create another key')
+                FutureBuilder<Booking>(
+                  future: futureResult,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      if (snapshot.data!.nfcCount < 2)
+                        return Column(
+                          children: [
+                            SecondaryButton(
+                                textButton: 'Create another key',
+                                action: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => NfcWriteData(
+                                          dataToWrite: widget.dataToWrite),
+                                    ),
+                                  );
+                                },
+                                size: 1),
+                            SecondaryButton(
+                                textButton: 'Return Home',
+                                action: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Home(),
+                                    ),
+                                  );
+                                },
+                                size: 2),
+                          ],
+                        );
+                    }
+                    return Column(
+                      children: [
+                        Text('2 cards already created'),
+                        SizedBox(height: 20),
+                        SecondaryButton(
+                            textButton: 'Return Home',
+                            action: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Home(),
+                                ),
+                              );
+                            },
+                            size: 1),
+                      ],
+                    );
+                  },
+                ),
               ],
             ),
           ),

@@ -126,7 +126,7 @@ class _KeycardCreateNfcState extends State<NfcWriteData> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ConfirmCreatedCard(),
+              builder: (context) => ConfirmCreatedCard(dataToWrite: widget.dataToWrite),
             ),
           );
         else

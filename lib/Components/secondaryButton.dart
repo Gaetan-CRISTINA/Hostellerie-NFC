@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class SecondaryButton extends StatelessWidget {
   final String textButton;
-  const SecondaryButton({super.key, required this.textButton});
+  final VoidCallback action;
+  final int size;
+  const SecondaryButton({super.key, required this.textButton, required this.action, required this.size});
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: () => {print("login")},
+      onPressed: action,
       shape: RoundedRectangleBorder(
          side: BorderSide(color: Color(0xFFe6b34b)),
           borderRadius: BorderRadius.all(Radius.circular(35))),
