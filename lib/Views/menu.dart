@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Views/checkin1.dart';
 import 'package:hostellerie/Views/create_key1.dart';
+import 'package:hostellerie/Views/key_erase.dart';
 import 'package:hostellerie/Views/read_key1.dart';
 import '../Components/primaryButton.dart';
 
@@ -67,6 +68,21 @@ class Menu extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const ReadKey1(),
+                  ),
+                );
+              },
+              size: 1,
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            PrimaryButton(
+              textButton: 'Effacer clé',
+              action: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NfcEraseData(),
                   ),
                 );
               },
