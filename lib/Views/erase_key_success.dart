@@ -13,7 +13,7 @@ class ConfirmErasedKey extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: const Text(
-            'Check-in Customer key creator',
+            'Key Eraser',
           ),
           backgroundColor: Color(0xFFe6b34b),
         ),
@@ -25,7 +25,7 @@ class ConfirmErasedKey extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 18.0, left: 0),
                   child: Text(
-                    'Create Key',
+                    'Erase key',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                   ),
                 ),
