@@ -15,8 +15,10 @@ Future openDoor(int roomId, String hash) async {
       body: jsonString);
   if (response.statusCode == 200) {
     return doorResponseFromJson(response.body);
+  } else if (response.statusCode == 401) {
+    return doorResponseFromJson(response.body);
   } else {
-    throw Exception('too many key created');
+    throw Exception('error call api');
   }
 }
 

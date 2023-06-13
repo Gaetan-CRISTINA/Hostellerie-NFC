@@ -3,9 +3,6 @@ import 'package:hostellerie/Components/primaryButton.dart';
 import 'package:hostellerie/Methods/read_key.dart';
 import '../Models/room_identity.dart';
 import './read_key2.dart';
-import 'package:nfc_manager/nfc_manager.dart';
-import '../nfc_helpers/ndef_records.dart';
-import '../nfc_helpers/nfc_wrapper_view.dart';
 
 class ReadKey1 extends StatefulWidget {
   const ReadKey1({Key? key}) : super(key: key);
@@ -55,16 +52,18 @@ class _ReadKey1State extends State<ReadKey1> {
                         color: Colors.white,
                         child: Text('Room id n° ${e.id}')
                       ),
+                      SizedBox(height: 10),
                       PrimaryButton(
                         textButton: 'Test Key',
                         action: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ReadKey2(roomId:e.id, hash: ''),
+                              builder: (context) => ReadKey2(roomId:e.id),
                             ),
                           );
                         }, size: 1,),
+                      SizedBox(height: 25),
                     ],
                   ),
                 );
