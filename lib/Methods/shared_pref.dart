@@ -1,14 +1,25 @@
+import 'package:hostellerie/Models/loginResponse.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefRepository{
+class SharedPrefRepository {
   SharedPreferences? sharedPreferences;
-  bool test = false;
+  String token = '';
 
   void getSharedPrefs() async {
     sharedPreferences = await SharedPreferences.getInstance();
+    token = sharedPreferences?.getString('token') ?? '';
   }
 
-  SharedPrefRepository(){
+  SharedPrefRepository() {
     getSharedPrefs();
+  }
+
+  String getToken() {
+    return token;
+  }
+
+  setToken(String value) {
+    token = value;
+    sharedPreferences?.setString('token', token);
   }
 }

@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:hostellerie/Components/secondaryButton.dart';
 import 'package:hostellerie/Views/checkin1.dart';
 import 'package:hostellerie/Views/create_key1.dart';
 import 'package:hostellerie/Views/key_erase.dart';
 import 'package:hostellerie/Views/read_key1.dart';
 import 'package:hostellerie/Views/login.dart';
+import 'package:provider/provider.dart';
 import '../Components/primaryButton.dart';
+import '../Providers/AuthProvider.dart';
 
 class Menu extends StatelessWidget {
   const Menu({super.key});
@@ -92,15 +95,10 @@ class Menu extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            PrimaryButton(
-              textButton: 'Login',
+            SecondaryButton(
+              textButton: 'Logout',
               action: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Login(),
-                  ),
-                );
+                Provider.of<AuthProvider>(context, listen: false).logoutUser();
               },
               size: 1,
             ),
