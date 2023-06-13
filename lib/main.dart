@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'Views/menu.dart';
-import 'package:hostellerie/Views/qr_code.dart';
 
 void main() => runApp(const MyApp());
 

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/primaryButton.dart';
+import 'package:hostellerie/Views/nfc_write.dart';
 import '../Models/booking.dart';
-import '../Views/create_key2.dart';
 
 class CustomerCard extends StatelessWidget {
   final Booking booking;
@@ -14,10 +14,7 @@ class CustomerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.only(
-            bottom: 5,
-            left: 7,
-            right: 7),
+        padding: const EdgeInsets.only(bottom: 5, left: 7, right: 7),
         child: Card(
           elevation: 0,
           color: booking.nfcCount > 0 ? Color(0xFF96E29E) : Color(0xFFE9E9E9),
@@ -57,18 +54,21 @@ class CustomerCard extends StatelessWidget {
                         SizedBox(
                           height: 25,
                         ),
-                        PrimaryButton(
-                          textButton: 'Create key',
-                          action: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CreateKey2(),
-                              ),
-                            );
-                          },
-                          size: 2,
-                        ),
+                        if (booking.nfcCount < 2)
+                          PrimaryButton(
+                            textButton: 'Create key',
+                            action: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => NfcWriteData(
+                                      dataToWrite:
+                                          booking.bookingId.toString()),
+                                ),
+                              );
+                            },
+                            size: 2,
+                          ),
                       ],
                     ),
                   ),

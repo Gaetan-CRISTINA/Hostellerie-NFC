@@ -1,30 +1,23 @@
-//Author : Anthony Da Cruz - 2023
-// ignore_for_file: prefer_const_constructors_in_immutables, unused_field, prefer_final_fields, avoid_print, prefer_const_constructors, curly_braces_in_flow_control_structures, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors_in_immutables, unused_local_variable, unused_field, avoid_print, prefer_final_fields, use_build_context_synchronously, curly_braces_in_flow_control_structures, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:hostellerie/Views/confirm_created_card.dart';
-import 'package:hostellerie/Views/fail_created_card.dart';
+import 'package:hostellerie/Views/erase_key_success.dart';
+import '/nfc_helpers/nfc_wrapper_view.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
-import '../Methods/bookings_methods.dart';
-import '../nfc_helpers/nfc_wrapper_view.dart';
-
-class NfcWriteData extends StatefulWidget {
-  final String dataToWrite;
-  NfcWriteData({super.key, required this.dataToWrite});
+class NfcEraseData extends StatefulWidget {
+  NfcEraseData({Key? key}) : super(key: key);
 
   @override
-  State<NfcWriteData> createState() => _KeycardCreateNfcState();
+  State<NfcEraseData> createState() => _NfcEraseData();
 }
 
-class _KeycardCreateNfcState extends State<NfcWriteData> {
-  getDataCallback(String data) {}
-
+class _NfcEraseData extends State<NfcEraseData> {
   bool _isScanning = false;
   bool? _writeSuccess;
   bool? _validationSuccess = false;
 
-  // String _dataToWrite = dataToWrite;
+  String _dataToWrite = "";
 
   late Future<String> _generatedKey;
   Future<bool?> _linkKeyToReservation = Future.value(false);
@@ -48,22 +41,11 @@ class _KeycardCreateNfcState extends State<NfcWriteData> {
           children: [
             const SizedBox(height: 40),
             GestureDetector(
-              onTap: () async {
-                try {
-                  writeData(await getHash(widget.dataToWrite));
-                  setState(() {
-                    _isScanning = true;
-                  });
-                } catch (e) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FailCreatedCard(),
-                      ));
-                  setState(() {
-                    _isScanning = false;
-                  });
-                }
+              onTap: () => {
+                setState(() {
+                  _isScanning = true;
+                  writeData(_dataToWrite);
+                })
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -74,10 +56,16 @@ class _KeycardCreateNfcState extends State<NfcWriteData> {
                     padding: const EdgeInsets.fromLTRB(20, 40, 20, 40),
                     child: Column(
                       children: [
+                        Text("Key will be erased",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                            textAlign: TextAlign.center),
                         const SizedBox(height: 20),
                         NFCWrapperView(isScanning: _isScanning),
                         const SizedBox(height: 20),
-                        Text("Touch NFC icon to create key",
+                        Text("Touch NFC icon to erase tag",
                             style: TextStyle(
                                 color: Colors.orangeAccent[800],
                                 fontSize: 20,
@@ -88,7 +76,8 @@ class _KeycardCreateNfcState extends State<NfcWriteData> {
                   ),
                 ),
               ),
-            ), // Text('Data: ${result!.code}')
+            ),
+            const SizedBox(height: 20),
           ],
         ));
   }
@@ -126,14 +115,7 @@ class _KeycardCreateNfcState extends State<NfcWriteData> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ConfirmCreatedCard(dataToWrite: widget.dataToWrite),
-            ),
-          );
-        else
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => FailCreatedCard(),
+              builder: (context) => const ConfirmErasedKey(),
             ),
           );
       } catch (e) {

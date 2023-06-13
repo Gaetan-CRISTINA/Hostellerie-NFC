@@ -6,8 +6,7 @@ import '../Models/booking.dart';
 import '../Components/customerCard.dart';
 
 class CreateKey1 extends StatefulWidget {
-  const CreateKey1({
-    super.key});
+  const CreateKey1({super.key});
 
   @override
   State<CreateKey1> createState() => _Booking();
@@ -32,7 +31,6 @@ class _Booking extends State<CreateKey1> {
         ),
         backgroundColor: Color(0xFFe6b34b),
       ),
-
       body: FutureBuilder(
         future: futureResult,
         builder: (context, snapshot) {
@@ -58,9 +56,11 @@ class _Booking extends State<CreateKey1> {
                           ],
                         ),
                       ),
-                    );
-                  }).toList()
-            ],);
+                    ),
+                  );
+                }).toList()
+              ],
+            );
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }
@@ -68,4 +68,5 @@ class _Booking extends State<CreateKey1> {
         },
       ),
     );
-  }}
+  }
+}

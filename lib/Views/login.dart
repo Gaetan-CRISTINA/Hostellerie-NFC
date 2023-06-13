@@ -1,5 +1,6 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:hostellerie/Components/secondaryButton.dart';
 import 'package:hostellerie/Views/menu.dart';
 import '../Components/primaryButton.dart';
 
@@ -39,7 +40,7 @@ class Login extends StatelessWidget {
                   hintText: 'Enter Your Name'),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: PrimaryButton(
                 textButton: 'Login',
                 action: () {
@@ -60,12 +61,6 @@ class Login extends StatelessWidget {
                 style: TextStyle(
                   color: Color(0xFF6200EF),
                 ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: SecondaryButton(
-                textButton: 'Cancel',
               ),
             ),
           ],
