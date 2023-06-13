@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/secondaryButton.dart';
 import 'package:hostellerie/Methods/bookings_methods.dart';
 import 'package:hostellerie/Models/booking.dart';
-import 'package:hostellerie/Views/menu.dart';
 import 'package:hostellerie/Views/nfc_write.dart';
+import 'package:hostellerie/main.dart';
 
 class ConfirmCreatedCard extends StatefulWidget {
   final String dataToWrite;
@@ -86,7 +86,7 @@ class _ConfirmCreatedCard extends State<ConfirmCreatedCard> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Menu(),
+                                      builder: (context) => Home(),
                                     ),
                                   );
                                 },
@@ -104,7 +104,7 @@ class _ConfirmCreatedCard extends State<ConfirmCreatedCard> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Menu(),
+                                  builder: (context) => Home(),
                                 ),
                               );
                             },

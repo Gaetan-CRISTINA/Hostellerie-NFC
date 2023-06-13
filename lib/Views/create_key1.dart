@@ -6,8 +6,7 @@ import '../Models/booking.dart';
 import '../Components/customerCard.dart';
 
 class CreateKey1 extends StatefulWidget {
-  const CreateKey1({
-    super.key});
+  const CreateKey1({super.key});
 
   @override
   State<CreateKey1> createState() => _Booking();
@@ -32,35 +31,33 @@ class _Booking extends State<CreateKey1> {
         ),
         backgroundColor: Color(0xFFe6b34b),
       ),
-
       body: FutureBuilder(
         future: futureResult,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView(
-                scrollDirection: Axis.vertical,children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30,
-                        bottom: 15,
-                        left: 25
-                    ),
-                    child: Text("Choose a booking",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-                  ),
-                  ...snapshot.data!.map((e) {
-                    return Center(
-                      child: Container(
-                        color: Colors.white,
-                        child: Column(
-                          children: <Widget>[
-                            CustomerCard(booking: e),
-                          ],
-                        ),
+              scrollDirection: Axis.vertical,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, bottom: 15, left: 25),
+                  child: Text("Choose a booking",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                ),
+                ...snapshot.data!.map((e) {
+                  return Center(
+                    child: Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: <Widget>[
+                          CustomerCard(booking: e),
+                        ],
                       ),
-                    );
-                  }).toList()
-            ],);
+                    ),
+                  );
+                }).toList()
+              ],
+            );
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }
@@ -68,4 +65,5 @@ class _Booking extends State<CreateKey1> {
         },
       ),
     );
-  }}
+  }
+}
