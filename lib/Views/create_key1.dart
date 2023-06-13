@@ -36,25 +36,22 @@ class _Booking extends State<CreateKey1> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView(
-                scrollDirection: Axis.vertical,children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30,
-                        bottom: 25,
-                        left: 10
-                    ),
-                    child: Text("Choose a booking",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-                  ),
-                  ...snapshot.data!.map((e) {
-                    return Center(
-                      child: Container(
-                        color: Colors.white,
-                        child: Column(
-                          children: <Widget>[
-                            CustomerCard(booking: e),
-                          ],
-                        ),
+              scrollDirection: Axis.vertical,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, bottom: 25, left: 10),
+                  child: Text("Choose a booking",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                ),
+                ...snapshot.data!.map((e) {
+                  return Center(
+                    child: Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: <Widget>[
+                          CustomerCard(booking: e),
+                        ],
                       ),
                     ),
                   );
