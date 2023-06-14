@@ -17,10 +17,11 @@ class CreateKey1 extends StatefulWidget {
 class _Booking extends State<CreateKey1> {
   late Future<List<Booking>> futureResult;
 
+
   @override
   void initState() {
     super.initState();
-    futureResult = fetchAllBookings();
+    futureResult = fetchAllBookings(Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
   }
 
   @override

@@ -3,6 +3,9 @@ import 'package:hostellerie/Components/primaryButton.dart';
 import 'package:hostellerie/Methods/read_key.dart';
 import 'package:hostellerie/Views/read_key1.dart';
 import 'package:hostellerie/Views/read_key2.dart';
+import 'package:provider/provider.dart';
+
+import '../Providers/AuthProvider.dart';
 
 class ReadKey3 extends StatefulWidget {
   final int roomId;
@@ -20,7 +23,7 @@ class _ReadKey3State extends State<ReadKey3> {
   @override
   void initState() {
     super.initState();
-    openDoorResult = openDoor(widget.roomId, widget.hash);
+    openDoorResult = openDoor(widget.roomId, widget.hash,Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
   }
 
   @override

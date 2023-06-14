@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/secondaryButton.dart';
 import 'package:hostellerie/Methods/bookings_methods.dart';
 import 'package:hostellerie/Models/booking.dart';
+import 'package:hostellerie/Providers/AuthProvider.dart';
 import 'package:hostellerie/Views/nfc_write.dart';
 import 'package:hostellerie/main.dart';
+import 'package:provider/provider.dart';
 
 class ConfirmCreatedCard extends StatefulWidget {
   final String dataToWrite;
@@ -21,7 +23,7 @@ class _ConfirmCreatedCard extends State<ConfirmCreatedCard> {
   @override
   void initState() {
     super.initState();
-    futureResult = fetchBookingById(widget.dataToWrite);
+    futureResult = fetchBookingById(widget.dataToWrite, Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
   }
 
   @override

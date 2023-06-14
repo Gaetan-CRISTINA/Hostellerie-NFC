@@ -49,8 +49,8 @@ class AuthProvider extends ChangeNotifier {
       final loginResponse = loginResponseFromJson(response.body);
       token = loginResponse.token;
       _loggedInStatus = Status.LoggedIn;
-      notifyListeners();
       sharedPrefRepository.setToken(loginResponse.token);
+      notifyListeners();
     } else {
       _loggedInStatus = Status.NotLoggedIn;
       notifyListeners();
@@ -59,7 +59,7 @@ class AuthProvider extends ChangeNotifier {
 
   void logoutUser() {
     _loggedInStatus = Status.NotLoggedIn;
-    notifyListeners();
     sharedPrefRepository.setToken('');
+    notifyListeners();
   }
 }

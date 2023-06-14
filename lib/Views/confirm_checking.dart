@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:hostellerie/Providers/AuthProvider.dart';
+import 'package:provider/provider.dart';
 
 import '../Methods/bookings_methods.dart';
 import 'nfc_write.dart';
@@ -43,7 +45,7 @@ class ConfirmCheckin extends StatelessWidget {
               ),
               MaterialButton(
                 onPressed: () => {
-                  updateBooking(dataToWrite),
+                  updateBooking(dataToWrite,Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token),
                   Navigator.push(
                     context,
                     MaterialPageRoute(
