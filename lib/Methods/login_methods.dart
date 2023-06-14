@@ -2,8 +2,16 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:hostellerie/Methods/shared_pref.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+
+import '../Models/loginResponse.dart';
+
+LoginResponse loginResponseFromJson(String str) =>
+    LoginResponse.fromJson(json.decode(str));
+
+String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
 
 void loginUser(
     {required TextEditingController password,
@@ -19,8 +27,15 @@ void loginUser(
       Uri.parse('https://hostellerie-asteracee.online/api/login'),
       headers: headers,
       body: jsonString);
+
   if (response.statusCode == 200) {
-    print(response.body);
+    final loginResponse = loginResponseFromJson(response.body);
+
+    SharedPrefRepository sharedPrefRepository = SharedPrefRepository();
+
+    sharedPrefRepository.setToken(loginResponse.token);
+
+    print(sharedPrefRepository.token);
   } else {
     print('Pas OK!!');
     throw Exception('Fail to login');

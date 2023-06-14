@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/primaryButton.dart';
 import 'package:hostellerie/Methods/read_key.dart';
+import 'package:hostellerie/Providers/AuthProvider.dart';
+import 'package:provider/provider.dart';
 import '../Models/room_identity.dart';
 import './read_key2.dart';
 
@@ -17,7 +19,7 @@ class _ReadKey1State extends State<ReadKey1> {
   @override
   void initState() {
     super.initState();
-    futureListRooms = getAllRooms();
+    futureListRooms = getAllRooms(Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
   }
   @override
   Widget build(BuildContext context) {

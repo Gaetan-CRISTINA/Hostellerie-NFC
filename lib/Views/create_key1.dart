@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../Methods/bookings_methods.dart';
 import '../Models/booking.dart';
 import '../Components/customerCard.dart';
+import '../Providers/AuthProvider.dart';
 
 class CreateKey1 extends StatefulWidget {
   const CreateKey1({super.key});
@@ -15,10 +17,11 @@ class CreateKey1 extends StatefulWidget {
 class _Booking extends State<CreateKey1> {
   late Future<List<Booking>> futureResult;
 
+
   @override
   void initState() {
     super.initState();
-    futureResult = fetchAllBookings();
+    futureResult = fetchAllBookings(Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
   }
 
   @override
@@ -59,6 +62,8 @@ class _Booking extends State<CreateKey1> {
               ],
             );
           } else if (snapshot.hasError) {
+            print(snapshot.error);
+            Provider.of<AuthProvider>(context, listen: false).logoutUser();
             return Text('${snapshot.error}');
           }
           return const CircularProgressIndicator();

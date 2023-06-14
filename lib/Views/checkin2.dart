@@ -3,9 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:hostellerie/Components/bookingCard.dart';
 import 'package:hostellerie/Views/confirm_checking.dart';
+import 'package:provider/provider.dart';
 
 import '../Methods/bookings_methods.dart';
 import '../Models/booking.dart';
+import '../Providers/AuthProvider.dart';
 
 class Checkin2 extends StatefulWidget {
   final String bookingId;
@@ -23,7 +25,7 @@ class _Checkin2 extends State<Checkin2> {
   @override
   void initState() {
     super.initState();
-    futurBooking = fetchBookingById(widget.bookingId);
+    futurBooking = fetchBookingById(widget.bookingId,Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
   }
 
   @override
@@ -68,7 +70,7 @@ class _Checkin2 extends State<Checkin2> {
               SizedBox(height: 30),
               MaterialButton(
                 onPressed: () => {
-                  updateBooking(dataToWrite!),
+                  updateBooking(dataToWrite!,Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token),
                   if (dataToWrite != null)
                     Navigator.push(
                       context,

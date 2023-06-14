@@ -1,7 +1,9 @@
 // ignore_for_file: avoid_print, prefer_const_constructors, use_build_context_synchronously
 
-import '../Methods/login_methods.dart';
+import 'package:hostellerie/Providers/AuthProvider.dart';
+import 'package:provider/provider.dart';
 
+import '../Methods/login_methods.dart';
 import 'package:flutter/material.dart';
 import '../Components/primaryButton.dart';
 
@@ -69,7 +71,7 @@ class _LoginState extends State<Login> {
             child: PrimaryButton(
               textButton: 'Login',
               action: () {
-                loginUser(email: email, password: password);
+                Provider.of<AuthProvider>(context, listen: false).loginUser(email: email, password: password);
               },
               size: 1,
             ),

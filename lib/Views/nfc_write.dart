@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:hostellerie/Views/confirm_created_card.dart';
 import 'package:hostellerie/Views/fail_created_card.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:provider/provider.dart';
 
 import '../Methods/bookings_methods.dart';
+import '../Providers/AuthProvider.dart';
 import '../nfc_helpers/nfc_wrapper_view.dart';
 
 class NfcWriteData extends StatefulWidget {
@@ -50,7 +52,7 @@ class _KeycardCreateNfcState extends State<NfcWriteData> {
             GestureDetector(
               onTap: () async {
                 try {
-                  writeData(await getHash(widget.dataToWrite));
+                  writeData(await getHash(widget.dataToWrite, Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token));
                   setState(() {
                     _isScanning = true;
                   });
