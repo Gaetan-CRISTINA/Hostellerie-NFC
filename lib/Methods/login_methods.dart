@@ -35,7 +35,7 @@ void loginUser(
 
     sharedPrefRepository.setToken(loginResponse.token);
 
-    print(sharedPrefRepository.getToken());
+    print(sharedPrefRepository.token);
   } else {
     print('Pas OK!!');
     throw Exception('Fail to login');

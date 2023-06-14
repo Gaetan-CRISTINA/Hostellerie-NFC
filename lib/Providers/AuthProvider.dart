@@ -18,7 +18,12 @@ class AuthProvider extends ChangeNotifier {
   SharedPrefRepository sharedPrefRepository = SharedPrefRepository();
 
   AuthProvider() {
-    token = sharedPrefRepository.getToken();
+    fetchToken();
+    getUserInfo();
+  }
+
+  fetchToken() async {
+    token = await sharedPrefRepository.getToken();
   }
 
   LoginResponse loginResponseFromJson(String str) =>
@@ -26,9 +31,32 @@ class AuthProvider extends ChangeNotifier {
 
   String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
 
-  // getUserInfo(){
-  // TODO à l'ouverture de main
-  // }
+  getUserInfo() async {
+    print(token);
+    // Ici on a pas le token
+    final data = {
+      'token': token,
+    };
+
+    final jsonString = json.encode(data);
+    final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+    final response = await http.post(
+        Uri.parse('https://hostellerie-asteracee.online/api/findUser'),
+        headers: headers,
+        body: jsonString);
+    // On a  le token ICI
+    // print(sharedPrefRepository.token);
+
+    if (response.statusCode == 200) {
+      _loggedInStatus = Status.LoggedIn;
+      notifyListeners();
+    } else {
+      _loggedInStatus = Status.NotLoggedIn;
+      notifyListeners();
+    }
+    // Ici on a le token
+    print(token);
+  }
 
   void loginUser(
       {required TextEditingController password,
@@ -47,7 +75,6 @@ class AuthProvider extends ChangeNotifier {
 
     if (response.statusCode == 200) {
       final loginResponse = loginResponseFromJson(response.body);
-      token = loginResponse.token;
       _loggedInStatus = Status.LoggedIn;
       sharedPrefRepository.setToken(loginResponse.token);
       notifyListeners();
