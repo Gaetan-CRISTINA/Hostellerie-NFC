@@ -80,9 +80,9 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  void logoutUser() {
+  void logoutUser() async {
     _loggedInStatus = Status.NotLoggedIn;
-    sharedPrefRepository.remove('token');
+    await sharedPrefRepository.remove('token');
     notifyListeners();
   }
 }
