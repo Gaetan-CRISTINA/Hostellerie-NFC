@@ -16,13 +16,28 @@ class MyApp extends StatelessWidget {
 
   static const String _title = 'Hostellerie Asteracee';
 
+  Widget loader(Status status) {
+    switch (status) {
+      case Status.LoggedIn:
+        {
+          return Menu();
+        }
+      case Status.Loading:
+        {
+          return Center(child: CircularProgressIndicator());
+        }
+      default:
+        {
+          return Login();
+        }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Consumer<AuthProvider>(builder: (context, authProvider, child) {
-        return authProvider.loggedInStatus == Status.LoggedIn
-            ? Menu()
-            : Login();
+        return loader(authProvider.loggedInStatus);
       }),
       debugShowCheckedModeBanner: false,
       title: _title,

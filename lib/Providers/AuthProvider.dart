@@ -8,10 +8,10 @@ import 'package:hostellerie/Models/loginResponse.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum Status { NotLoggedIn, LoggedIn }
+enum Status { NotLoggedIn, LoggedIn, Loading }
 
 class AuthProvider extends ChangeNotifier {
-  Status _loggedInStatus = Status.NotLoggedIn;
+  Status _loggedInStatus = Status.Loading;
 
   Status get loggedInStatus => _loggedInStatus;
   String? token;
