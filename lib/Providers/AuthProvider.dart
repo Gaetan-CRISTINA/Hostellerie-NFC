@@ -33,8 +33,6 @@ class AuthProvider extends ChangeNotifier {
   String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
 
   getUserInfo() async {
-    print(token);
-    // Ici on a pas le token
     final data = {
       'token': token,
     };
@@ -45,8 +43,6 @@ class AuthProvider extends ChangeNotifier {
         Uri.parse('https://hostellerie-asteracee.online/api/findUser'),
         headers: headers,
         body: jsonString);
-    // On a  le token ICI
-    // print(sharedPrefRepository.token);
 
     if (response.statusCode == 200) {
       _loggedInStatus = Status.LoggedIn;
@@ -55,8 +51,6 @@ class AuthProvider extends ChangeNotifier {
       _loggedInStatus = Status.NotLoggedIn;
       notifyListeners();
     }
-    // Ici on a le token
-    print(token);
   }
 
   void loginUser(
@@ -84,13 +78,11 @@ class AuthProvider extends ChangeNotifier {
       _loggedInStatus = Status.NotLoggedIn;
       notifyListeners();
     }
-    print(token);
   }
 
   void logoutUser() {
-    // _loggedInStatus = Status.NotLoggedIn;
-    // sharedPrefRepository.setToken('');
-    // notifyListeners();
-    print(token);
+    _loggedInStatus = Status.NotLoggedIn;
+    sharedPrefRepository.remove('token');
+    notifyListeners();
   }
 }
