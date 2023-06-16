@@ -6,7 +6,6 @@ import 'package:hostellerie/Views/checkin1.dart';
 import 'package:hostellerie/Views/create_key1.dart';
 import 'package:hostellerie/Views/key_erase.dart';
 import 'package:hostellerie/Views/read_key1.dart';
-import 'package:hostellerie/Views/login.dart';
 import 'package:provider/provider.dart';
 import '../Components/primaryButton.dart';
 import '../Providers/AuthProvider.dart';
