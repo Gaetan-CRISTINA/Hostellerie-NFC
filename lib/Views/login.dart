@@ -71,17 +71,11 @@ class _LoginState extends State<Login> {
             child: PrimaryButton(
               textButton: 'Login',
               action: () {
-                Provider.of<AuthProvider>(context, listen: false).loginUser(email: email, password: password);
+                Provider.of<AuthProvider>(context, listen: false)
+                    .loginUser(email: email, password: password);
               },
               size: 1,
             ),
-          ),
-          SecondaryButton(
-            textButton: 'Logout',
-            action: () {
-              Provider.of<AuthProvider>(context, listen: false).logoutUser();
-            },
-            size: 1,
           ),
           const Padding(
             padding: EdgeInsets.all(15.0),

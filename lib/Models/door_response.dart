@@ -6,11 +6,11 @@ String doorResponseToJson(DoorResponse data) => json.encode(data.toJson());
 
 class DoorResponse {
   bool open;
-  String error;
+  String? error;
 
   DoorResponse({
     required this.open,
-    required this.error,
+    this.error,
   });
 
   factory DoorResponse.fromJson(Map<String, dynamic> json) => DoorResponse(

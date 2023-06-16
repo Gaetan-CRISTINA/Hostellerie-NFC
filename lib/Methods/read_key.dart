@@ -4,6 +4,7 @@ import 'package:hostellerie/Models/door_response.dart';
 import 'package:http/http.dart' as http;
 
 import '../Models/room_identity.dart';
+import '../Providers/AuthProvider.dart';
 
 Future openDoor(int roomId, String hash, String token) async {
   final body = {'room_id': roomId, 'hash': hash};
@@ -13,7 +14,7 @@ Future openDoor(int roomId, String hash, String token) async {
     HttpHeaders.authorizationHeader: 'Bearer $token',
   };
   final response = await
-  http.post(Uri.parse('https://hostellerie-asteracee.online/api/openDoor'),
+  http.post(Uri.parse('$apiUrl/api/openDoor'),
       headers: headers,
       body: jsonString);
   if (response.statusCode == 200) {
@@ -31,7 +32,7 @@ Future<List<RoomIdentity>> getAllRooms(String token) async{
     HttpHeaders.authorizationHeader: 'Bearer $token',
   };
   var response = await http
-      .get(Uri.parse('https://hostellerie-asteracee.online/api/getAllRooms'),headers: headers
+      .get(Uri.parse('$apiUrl/api/getAllRooms'),headers: headers
   );
   if (response.statusCode == 200) {
     return roomIdentityFromJson(response.body);

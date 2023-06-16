@@ -8,6 +8,8 @@ import 'package:hostellerie/Models/loginResponse.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+var apiUrl = "https://hostellerie-asteracee.online";
+
 enum Status { NotLoggedIn, LoggedIn, Loading }
 
 class AuthProvider extends ChangeNotifier {
@@ -38,11 +40,12 @@ class AuthProvider extends ChangeNotifier {
     };
 
     final jsonString = json.encode(data);
-    final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-    final response = await http.post(
-        Uri.parse('https://hostellerie-asteracee.online/api/findUser'),
-        headers: headers,
-        body: jsonString);
+    final headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.acceptHeader: 'application/json'
+    };
+    final response = await http.post(Uri.parse('$apiUrl/api/findUser'),
+        headers: headers, body: jsonString);
 
     if (response.statusCode == 200) {
       _loggedInStatus = Status.LoggedIn;
@@ -55,24 +58,25 @@ class AuthProvider extends ChangeNotifier {
 
   void loginUser(
       {required TextEditingController password,
-      required TextEditingController email})
-  async {
+      required TextEditingController email}) async {
     final data = {
       'email': email.text.toString(),
       'password': password.text.toString(),
     };
 
     final jsonString = json.encode(data);
-    final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-    final response = await http.post(
-        Uri.parse('https://hostellerie-asteracee.online/api/login'),
-        headers: headers,
-        body: jsonString);
+    final headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.acceptHeader: 'application/json'
+    };
+    final response = await http.post(Uri.parse('$apiUrl/api/login'),
+        headers: headers, body: jsonString);
 
     if (response.statusCode == 200) {
       final loginResponse = loginResponseFromJson(response.body);
       _loggedInStatus = Status.LoggedIn;
-      await sharedPrefRepository.setString('token',loginResponse.token);
+      token = loginResponse.token;
+      await sharedPrefRepository.setString('token', loginResponse.token);
       notifyListeners();
     } else {
       _loggedInStatus = Status.NotLoggedIn;
@@ -81,6 +85,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void logoutUser() async {
+    token = '';
     _loggedInStatus = Status.NotLoggedIn;
     await sharedPrefRepository.remove('token');
     notifyListeners();
