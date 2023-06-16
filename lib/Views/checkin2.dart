@@ -25,7 +25,7 @@ class _Checkin2 extends State<Checkin2> {
   @override
   void initState() {
     super.initState();
-    futurBooking = fetchBookingById(widget.bookingId,Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
+    futurBooking = fetchBookingById(widget.bookingId,Provider.of<AuthProvider>(context, listen: false).token!);
   }
 
   @override
@@ -70,7 +70,7 @@ class _Checkin2 extends State<Checkin2> {
               SizedBox(height: 30),
               MaterialButton(
                 onPressed: () => {
-                  updateBooking(dataToWrite!,Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token),
+                  updateBooking(dataToWrite!,Provider.of<AuthProvider>(context, listen: false).token!),
                   if (dataToWrite != null)
                     Navigator.push(
                       context,

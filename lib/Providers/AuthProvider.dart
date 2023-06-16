@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hostellerie/Methods/shared_pref.dart';
 import 'package:hostellerie/Models/loginResponse.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum Status { NotLoggedIn, LoggedIn }
 
@@ -15,15 +15,16 @@ class AuthProvider extends ChangeNotifier {
 
   Status get loggedInStatus => _loggedInStatus;
   String? token;
-  SharedPrefRepository sharedPrefRepository = SharedPrefRepository();
+  late SharedPreferences sharedPrefRepository;
 
   AuthProvider() {
-    fetchToken();
-    getUserInfo();
+    initSharedPref();
   }
 
-  fetchToken() async {
-    token = await sharedPrefRepository.getToken();
+  initSharedPref() async {
+    sharedPrefRepository = await SharedPreferences.getInstance();
+    token = sharedPrefRepository.getString('token');
+    getUserInfo();
   }
 
   LoginResponse loginResponseFromJson(String str) =>
@@ -60,7 +61,8 @@ class AuthProvider extends ChangeNotifier {
 
   void loginUser(
       {required TextEditingController password,
-      required TextEditingController email}) async {
+      required TextEditingController email})
+  async {
     final data = {
       'email': email.text.toString(),
       'password': password.text.toString(),
@@ -76,17 +78,19 @@ class AuthProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       final loginResponse = loginResponseFromJson(response.body);
       _loggedInStatus = Status.LoggedIn;
-      sharedPrefRepository.setToken(loginResponse.token);
+      await sharedPrefRepository.setString('token',loginResponse.token);
       notifyListeners();
     } else {
       _loggedInStatus = Status.NotLoggedIn;
       notifyListeners();
     }
+    print(token);
   }
 
   void logoutUser() {
-    _loggedInStatus = Status.NotLoggedIn;
-    sharedPrefRepository.setToken('');
-    notifyListeners();
+    // _loggedInStatus = Status.NotLoggedIn;
+    // sharedPrefRepository.setToken('');
+    // notifyListeners();
+    print(token);
   }
 }

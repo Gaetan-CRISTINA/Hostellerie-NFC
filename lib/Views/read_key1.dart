@@ -19,7 +19,7 @@ class _ReadKey1State extends State<ReadKey1> {
   @override
   void initState() {
     super.initState();
-    futureListRooms = getAllRooms(Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
+    futureListRooms = getAllRooms(Provider.of<AuthProvider>(context, listen: false).token!);
   }
   @override
   Widget build(BuildContext context) {

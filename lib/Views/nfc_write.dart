@@ -52,7 +52,7 @@ class _KeycardCreateNfcState extends State<NfcWriteData> {
             GestureDetector(
               onTap: () async {
                 try {
-                  writeData(await getHash(widget.dataToWrite, Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token));
+                  writeData(await getHash(widget.dataToWrite, Provider.of<AuthProvider>(context, listen: false).token!));
                   setState(() {
                     _isScanning = true;
                   });

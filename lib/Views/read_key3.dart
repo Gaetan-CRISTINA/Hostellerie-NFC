@@ -23,7 +23,7 @@ class _ReadKey3State extends State<ReadKey3> {
   @override
   void initState() {
     super.initState();
-    openDoorResult = openDoor(widget.roomId, widget.hash,Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
+    openDoorResult = openDoor(widget.roomId, widget.hash,Provider.of<AuthProvider>(context, listen: false).token!);
   }
 
   @override

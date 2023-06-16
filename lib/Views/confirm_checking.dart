@@ -45,7 +45,7 @@ class ConfirmCheckin extends StatelessWidget {
               ),
               MaterialButton(
                 onPressed: () => {
-                  updateBooking(dataToWrite,Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token),
+                  updateBooking(dataToWrite,Provider.of<AuthProvider>(context, listen: false).token!),
                   Navigator.push(
                     context,
                     MaterialPageRoute(

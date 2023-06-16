@@ -21,7 +21,7 @@ class _Booking extends State<CreateKey1> {
   @override
   void initState() {
     super.initState();
-    futureResult = fetchAllBookings(Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
+    futureResult = fetchAllBookings(Provider.of<AuthProvider>(context, listen: false).token!);
   }
 
   @override

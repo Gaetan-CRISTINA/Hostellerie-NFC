@@ -23,7 +23,7 @@ class _ConfirmCreatedCard extends State<ConfirmCreatedCard> {
   @override
   void initState() {
     super.initState();
-    futureResult = fetchBookingById(widget.dataToWrite, Provider.of<AuthProvider>(context, listen: false).sharedPrefRepository.token);
+    futureResult = fetchBookingById(widget.dataToWrite, Provider.of<AuthProvider>(context, listen: false).token!);
   }
 
   @override

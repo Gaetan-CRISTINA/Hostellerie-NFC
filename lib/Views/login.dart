@@ -3,7 +3,7 @@
 import 'package:hostellerie/Providers/AuthProvider.dart';
 import 'package:provider/provider.dart';
 
-import '../Methods/login_methods.dart';
+import '../Components/secondaryButton.dart';
 import 'package:flutter/material.dart';
 import '../Components/primaryButton.dart';
 
@@ -75,6 +75,13 @@ class _LoginState extends State<Login> {
               },
               size: 1,
             ),
+          ),
+          SecondaryButton(
+            textButton: 'Logout',
+            action: () {
+              Provider.of<AuthProvider>(context, listen: false).logoutUser();
+            },
+            size: 1,
           ),
           const Padding(
             padding: EdgeInsets.all(15.0),
