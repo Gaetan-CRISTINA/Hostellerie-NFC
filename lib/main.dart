@@ -1,19 +1,44 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types
 
 import 'dart:ui';
-import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'package:hostellerie/Providers/AuthProvider.dart';
+import 'package:hostellerie/Views/login.dart';
+import 'package:provider/provider.dart';
+import 'Views/menu.dart';
+
+void main() => runApp(ChangeNotifierProvider(
+    create: (context) => AuthProvider(), child: MyApp()));
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  static const String _title = 'NFT POWER';
+  static const String _title = 'Hostellerie Asteracee';
+
+  Widget loader(Status status) {
+    switch (status) {
+      case Status.LoggedIn:
+        {
+          return Menu();
+        }
+      case Status.Loading:
+        {
+          return Center(child: CircularProgressIndicator());
+        }
+      default:
+        {
+          return Login();
+        }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      home: Consumer<AuthProvider>(builder: (context, authProvider, child) {
+        return loader(authProvider.loggedInStatus);
+      }),
       debugShowCheckedModeBanner: false,
       title: _title,
     );
@@ -31,78 +56,9 @@ class Home extends StatelessWidget {
         title: const Text(
           'User Agent App',
         ),
-        backgroundColor: Color(0xFFEF7F00),
+        backgroundColor: Color(0xFFe6b34b),
       ),
-      body: const FirstPage(),
-    );
-  }
-}
-
-class FirstPage extends StatelessWidget {
-  const FirstPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final PageController controller = PageController();
-    return ScrollConfiguration(
-      behavior: ScrollConfiguration.of(context).copyWith(
-        dragDevices: {
-          PointerDeviceKind.touch,
-          PointerDeviceKind.mouse,
-        },
-      ),
-      child: Container(
-        color: const Color.fromARGB(255, 240, 239, 235),
-        child: PageView(
-          controller: controller,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Text(
-                  'Hostellerie de l\'Asteracée',
-                  style: TextStyle(
-                      height: 5, fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Container(
-                  width: 350,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("images/logo.png"),
-                    ),
-                  ),
-                ),
-                TextFormField(
-                  // The validator receives the text that the user has entered.
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  // The validator receives the text that the user has entered.
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                   
-                    child: const Text('Submit'),
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
+      body: const Menu(),
     );
   }
 }
